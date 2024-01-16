@@ -2,14 +2,22 @@ const { v4: uuid } = require('uuid')
 const writeData = require('../utilities/writeData')
 const readData = require('../utilities/readData.js')
 
+function formatUrl(url) {
+    //this allows the program to work in any cases (using http:// or not)
+    const parts = url.split('://')
+    if (parts.length == 1) return parts[0]
+    if (parts.length == 2) return parts[1]
+}
 const urlsController = {
     shortUrl: function shortUrl(req, res) {
         try {
-            const { url } = req.body
+            let { url } = req.body
+            const newUrl = formatUrl(url)
             let data = {}
-            data[uuid().substring(0, 4)] = url
+            const code = uuid().substring(0, 4)
+            data[code] = newUrl
             writeData(data)
-            res.status(200).send(data)
+            res.status(200).send(`http://localHost:8080/${code}`)
         } catch (err) {
             console.log('Error saving ulr:', err)
             res.status(500).send()

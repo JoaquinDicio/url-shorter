@@ -23,7 +23,7 @@ export default function UrlShorter() {
     function shortUrl() {
         try {
             if (!validate()) return null
-            axios.post("http://localHost:8080/new", { url }).then((res) => setNewUrl(res.data))
+            axios.post("https://node-shorter.onrender.com/new", { url }).then((res) => setNewUrl(res.data))
         } catch (err) {
             console.log(err)
             setErr('Something went wrong')

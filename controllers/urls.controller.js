@@ -17,7 +17,7 @@ const urlsController = {
             const code = uuid().substring(0, 4)
             data[code] = newUrl
             writeData(data)
-            res.status(200).send(`http://localHost:8080/${code}`)
+            res.status(200).send(`https://node-shorter.onrender.com/${code}`)
         } catch (err) {
             console.log('Error saving ulr:', err)
             res.status(500).send()
